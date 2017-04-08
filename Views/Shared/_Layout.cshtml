@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - Angular2</title>
+        <base href="/" />
+        <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+        <style>
+            #map {
+                height: 400px;
+                width: 50%;
+            }
+        </style>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByYmBQUUGViNw_8pqnBFBYCSluzoUqScY&callback=initMap" async defer></script>
+        <script data-require="jquery@3.2.0" data-semver="3.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <script type="text/javascript">
+    $(document).ready(function() {
+
+        $('div.deleter').hide();
+
+        $('button.duplicate').on('click', function(){
+            $('div.deleter').show();
+            $('div.geolocator').hide();
+        });
+
+        $('button.geolocator').on('click', function(){
+            $('div.deleter').hide();
+            $('div.geolocator').show();
+        });
+    });
+        </script>
+        <script>
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+        </script>
+    </head>
+    <body>
+        @RenderBody()
+
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
